@@ -2,8 +2,8 @@
 Files from the Ble34 project
 
 
-![Render of full PCB](images/FullRender.png.png)
+![Render of full PCB](images/FullRender.png)
 
-![Left PCB](Image/Left.png)
+![Left PCB](images/Left.png)
 
-![Left Schematic](LeftSchematic.png)
+![Left Schematic](images/LeftSchematic.png)
