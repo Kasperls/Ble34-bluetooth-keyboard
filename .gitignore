@@ -1,0 +1,13 @@
+# KiCad
+*-backups/
+fp-info-cache
+*.kicad_prl
+*.lck
+
+# Build
+picoprobe/build/
+picoprobe/build2/
+
+# Eksterne repoer
+picoprobe/pico-sdk/
+picoprobe/picoprobe/

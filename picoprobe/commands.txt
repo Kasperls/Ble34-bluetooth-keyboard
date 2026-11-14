@@ -1,0 +1,66 @@
+cmake -G "Ninja" -PICO_TOOLCHAIN_PATH="C:/Program Files (x86)/Arm GNU Toolchain/bin/" ../picoprobe
+
+cmake -G "Ninja" -DPICO_BOARD=pico_w -DPICO_SDK_PATH=C:/Users/kasp9/picoprobe/pico-sdk -DPICO_TOOLCHAIN_PATH="C:/Program Files (x86)/Arm GNU Toolchain/bin/" C:/Users/kasp9/picoprobe/picoprobe
+cmake -G "Ninja" -DPICO_BOARD=pico_w -DPICO_SDK_PATH=C:/Users/kasp9/pico-sdk -DPICO_TOOLCHAIN_PATH="C:/Program Files (x86)/Arm GNU Toolchain/bin" C:/Users/kasp9/picoprobe/picoprobe
+
+openocd -c 'interface jlink; transport select swd; source [find target/nrf52.cfg]' -c init -c 'nrf52.dap apreg 1 0xc' -c 'nrf52.dap apreg 1 0x4 1'
+
+openocd -f interface/cmsis-dap.cfg -c "transport select swd" -f C:/Users/kasp9/picoprobe/nrf52.cfg -c init -c "nrf52.dap apreg 1 0xc" -c "nrf52.dap apreg 1 0x4 1"
+
+
+
+
+
+C:\Users\kasp9>openocd -f interface/cmsis-dap.cfg -c "transport select swd" -f target/nrf52.cfg -c "flash probe 0"
+Open On-Chip Debugger 0.12.0 (2023-01-14-23:37)
+Licensed under GNU GPL v2
+For bug reports, read
+        http://openocd.org/doc/doxygen/bugs.html
+swd
+flash
+  flash bank bank_id driver_name base_address size_bytes chip_width_bytes
+            bus_width_bytes target [driver_options ...]
+  flash banks
+  flash init
+  flash list
+gdb_flash_program ('enable'|'disable')
+nand
+nrf5
+  nrf5 mass_erase
+nrf51
+  nrf51 mass_erase
+program <filename> [address] [pre-verify] [verify] [reset] [exit]
+
+
+
+
+
+flash bank <name> <driver> <base> <size> <chip_width> <bus_width> <target>
+  flash bank bank_id driver_name base_address size_bytes chip_width_bytes
+            bus_width_bytes target [driver_options ...]
+  flash bank
+  flash list
+
+
+
+
+
+
+C:/Users/kasp9/picoprobe/ebyte-e73-bootloader.hex
+
+
+openocd -f interface/cmsis-dap.cfg -f target/nrf52.cfg -c "
+init; 
+reset halt; 
+nrf52_recover;
+
+flash erase_sector 0 0 last;
+flash write_image erase C:/Users/kasp9/picoprobe/ebyte-nrf-bootloader.hex 0 ihex;
+verify_image C:/Users/kasp9/picoprobe/ebyte-nrf-bootloader.hex 0 ihex;
+reset run;
+"
+
+
+
+
+
